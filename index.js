@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const authController = require('./controllers/authController'); 
+const authRoutes = require('./routes/auth'); // Pastikan path ini benar
 
 const app = express();
 
@@ -8,8 +8,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Rute untuk login
-app.post('/login', authController.login);
+// Gunakan authRoutes untuk route yang berhubungan dengan autentikasi
+app.use('/auth', authRoutes);
 
 // Jalankan server
 const PORT = process.env.PORT || 3000;
