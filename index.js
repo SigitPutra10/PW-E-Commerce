@@ -1,18 +1,22 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const authRoutes = require('./routes/auth'); // Pastikan path ini benar
-
+import express from "express";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import db from "./config/Database.js";
+import router from "./routes/index.js";
+dotenv.config();
 const app = express();
 
-// Middleware untuk parsing body request
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+try {
+    await db.authenticate();
+    console.log('Database Connected..');
+} catch (error) {
+    console.error(error);
+}
 
-// Gunakan authRoutes untuk route yang berhubungan dengan autentikasi
-app.use('/auth', authRoutes);
+app.use(cors({ credentials:true, origin:'http://localhost:3000' }))
+app.use(cookieParser());
+app.use(express.json());
+app.use(router);
 
-// Jalankan server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+app.listen(3000, ()=> console.log('Server running at port 3000'));

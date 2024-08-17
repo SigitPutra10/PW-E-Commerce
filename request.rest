@@ -1,0 +1,47 @@
+GET http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsIm5hbWUiOiJVc2VyIiwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTcyMzkwNDY2OSwiZXhwIjoxNzIzOTA0Njg5fQ.W7fV-OLT6U1k4s1EYn2xoluCy7WP8nUC96_5R8pVk6E
+###
+POST  http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "Admin",
+    "email": "admin@gmail.com",
+    "password": "12345",
+    "confPassword": "12345"
+}
+
+###
+POST  http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "User",
+    "email": "user@gmail.com",
+    "password": "12345",
+    "confPassword": "12345"
+}
+
+###
+POST  http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email" : "admin@gmail.com",
+    "password" : "12345"
+}
+###
+POST  http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email" : "user@gmail.com",
+    "password" : "12345"
+}
+
+
+###
+GET  http://localhost:3000/token
+
+###
+DELETE http://localhost:3000/logout
