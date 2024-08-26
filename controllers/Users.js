@@ -4,33 +4,40 @@ import jwt from "jsonwebtoken";
 
 export const getUsers = async(req, res) => {
     try {
+        if(req.role !== 'admin') return res.sendStatus(403);
+
         const users = await Users.findAll({
-            attributes:['id','name','email']
+            attributes:['id','name','email', 'role'] 
         });
         res.json(users);
     } catch (error) {
         console.log(error);
+        res.status(500).json({msg: "Server Error"});
     }
 }
 
+
+
 export const Register = async(req, res) => {
-    const { name, email, password, confPassword } = req.body;
+    const { name, email, password, confPassword, role } = req.body;
     if(password !== confPassword) return res.status(400).json({msg: "Password dan Confirm Password tidak cocok"});
     
-    // Gunakan bcryptjs untuk hashing
     const salt = await bcryptjs.genSalt();
     const hashpassword = await bcryptjs.hash(password, salt);
     try {
         await Users.create({
             name: name,
             email: email,
-            password: hashpassword
+            password: hashpassword,
+            role: role // Tambahkan role ke dalam data yang disimpan
         });
         res.json({msg: "Register Berhasil"});
     } catch (error) {
         console.log(error);
+        res.status(500).json({msg: "Server Error"});
     }
 }
+
 
 export const Login = async(req, res) => {
     try {

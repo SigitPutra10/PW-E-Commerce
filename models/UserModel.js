@@ -13,6 +13,10 @@ const Users = db.define('users', {
     password: {
         type: DataTypes.STRING 
     },
+    role: {
+        type: DataTypes.STRING,
+        defaultValue: 'user'     
+    },
     refresh_token: {
         type: DataTypes.TEXT 
     }

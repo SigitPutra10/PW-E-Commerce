@@ -1,47 +1,54 @@
-GET http://localhost:3000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsIm5hbWUiOiJVc2VyIiwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTcyMzkwNDY2OSwiZXhwIjoxNzIzOTA0Njg5fQ.W7fV-OLT6U1k4s1EYn2xoluCy7WP8nUC96_5R8pVk6E
-###
-POST  http://localhost:3000/users
+### regis admin
+POST http://localhost:3000/users
 Content-Type: application/json
 
 {
     "name": "Admin",
     "email": "admin@gmail.com",
     "password": "12345",
-    "confPassword": "12345"
+    "confPassword": "12345",
+    "role": "admin"
 }
 
-###
-POST  http://localhost:3000/users
+### regis user
+POST http://localhost:3000/users
 Content-Type: application/json
 
 {
     "name": "User",
     "email": "user@gmail.com",
     "password": "12345",
-    "confPassword": "12345"
+    "confPassword": "12345",
+    "role": "user"
 }
 
-###
-POST  http://localhost:3000/login
+### login admin
+POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "email" : "admin@gmail.com",
-    "password" : "12345"
+    "email": "admin@gmail.com",
+    "password": "12345"
 }
-###
-POST  http://localhost:3000/login
+
+### login user
+POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-    "email" : "user@gmail.com",
-    "password" : "12345"
+    "email": "user@gmail.com",
+    "password": "12345"
 }
 
+### Access Token Admin
+GET http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsIm5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNzI0NjU2NTU4LCJleHAiOjE3MjQ2NTY1Nzh9.pzKUcR7JVHyCbV3laH6xS7XEeiusnuhOP3jc1OGOn5w
 
-###
-GET  http://localhost:3000/token
+### Access Token User
+GET http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsIm5hbWUiOiJVc2VyIiwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTcyNDY1NjQ3OCwiZXhwIjoxNzI0NjU2NDk4fQ.mQZg0Mak8DPfcXhURd_AEMloiSPQ29-VRjN-IRzKDOQ
+### Refresh Token
+GET http://localhost:3000/token
 
-###
+### Logout
 DELETE http://localhost:3000/logout
